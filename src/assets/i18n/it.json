@@ -1,0 +1,12 @@
+{
+ "homePage": {
+    "titolo": "Stock Traking App"
+  
+ },
+ "label1": "Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)",
+ "button1" : "Track Stok",
+
+ "errorMessage1" : "Symbol of stock is required",
+ "errorMessage2" : "Symbol length must be between 1 to 5 letter",
+ "errorMessage3" : "Symbol must be letters only"
+}

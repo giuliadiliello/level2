@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.bodyContainer {
+    padding-left: 26px;
+    padding-right: 26px;
+    padding-top: 26px;
+}

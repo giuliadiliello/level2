@@ -1,0 +1,42 @@
+
+<div class="bodyContainer">
+<div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+       
+
+        <div class="row">
+            <div class="col">
+                <label for="stockSymbol" class="form-label">{{ 'label1' | translate }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <input type="text" class="form-control uppercase" id="stockSymbol" [formControl]="symbol" required maxlength="5">
+                <div [hidden]="!symbol.errors?.['required']" class="alert alert-danger alertCustom">
+                    {{ 'errorMessage1' | translate }}
+                </div>
+           
+                <div [hidden]="!symbol.errors?.['maxlength']" class="alert alert-danger alertCustom">
+                    {{ 'errorMessage2' | translate }}
+                </div>
+
+                <div [hidden]="!symbol.errors?.['pattern']" class="alert alert-danger alertCustom">
+                    {{ 'errorMessage3' | translate }}
+                </div>
+            </div>
+            
+
+            <div class="col-sm">
+                <button [disabled]="!symbol?.valid" type="button" class="btn btn-outline-primary" (click)="loadSymbolIntoLocalStorage()">{{ 'button1' | translate }}</button>
+            </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+<app-current-quote [lista]="symbolList"></app-current-quote>
+
+        
+
