@@ -1,6 +1,8 @@
 {
  "homePage": {
-    "titolo": "Stock Traking App"
+    "titolo": "Stock Traking App",
+    "change-to-day": "Change today: ",
+    "opening-price": "Opening price: "
   
  },
  "label1": "Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)",
@@ -8,5 +10,7 @@
 
  "errorMessage1" : "Symbol of stock is required",
  "errorMessage2" : "Symbol length must be between 1 to 5 letter",
- "errorMessage3" : "Symbol must be letters only"
+ "errorMessage3" : "Symbol must be letters only",
+ "errorMessage4" : "Symbol of a stock not found",
+ "errorMessage5" : "Symbol already present"
 }

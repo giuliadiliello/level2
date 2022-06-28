@@ -1,9 +1,25 @@
 
-<div class="card shadow p-3 mb-5 bg-white rounded">
-    <div class="card-body">
-        <div *ngFor="let name of lista">
-            {{name}}
 
+<ng-container *ngIf="isLoad">
+  <!--  <div class="card shadow p-3 mb-5 bg-white rounded" *ngFor="let name of listaQuote"> -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                        <h3>{{typeStock.name}}</h3>
+                </div>
+            </div>
+
+           <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <p class="info-element-title"> {{ 'homePage.change-to-day' | translate }}</p>
+                <p class="info-element-value">{{typeStock.quote.d > 0 ? '+' : ''}}{{typeStock.quote.d}}</p>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <p class="info-element-title"> {{ 'homePage.opening-price' | translate }}</p>
+                <p class="info-element-value">{{typeStock.quote.o | currency}}</p>
+
+            </div>
+           </div>
         </div>
-    </div>
-</div>
+   <!-- </div>-->
+</ng-container>
