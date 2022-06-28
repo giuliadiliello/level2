@@ -1,8 +1,8 @@
 
 <div class="card shadow mb-5 bg-white rounded" *ngIf="isLoad">
     <div class="card-header">
-        <h3 class="title-card">{{typeStock.name}}</h3>
-        <fa-icon [icon]="faXmark" class="icon-close" (click)="eliminaElemento(typeStock)"></fa-icon>
+        <h3 class="title-card">{{typeStock.name}} ({{typeStock.symbol}})</h3>
+        <fa-icon [icon]="faXmark" class="icon-close" (click)="confermaEliminaElemento(typeStock)"></fa-icon>
       </div>
     <div class="card-body">
          

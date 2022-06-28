@@ -1,10 +1,14 @@
 
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs';
 import { Quote, TypeStock } from 'src/app/core/model/quote.interface';
 import { ISymbol, ISymbolLookup } from 'src/app/core/model/search.interface';
 import { HttpService } from 'src/app/core/service/http.service';
 import { faArrowDown, faArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
+import { TranslateService } from '@ngx-translate/core';
+
 
 
 
@@ -21,9 +25,16 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
   @Input()
   symbol!: ISymbol;
 
+  @Output()
+  eliminaEvento: EventEmitter<string> = new EventEmitter<string>();
+
+
   typeStock: TypeStock = {} as TypeStock;
   isLoad = false;
-  constructor(private httpService: HttpService) { }
+  constructor(
+    private httpService: HttpService,
+    private modalService: NgbModal
+   ) { }
   
 
   ngOnInit(): void {
@@ -96,13 +107,22 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
     ).subscribe( result => {
       this.typeStock.quote = result;
       this.typeStock.name = this.symbol.description;
+      this.typeStock.symbol = this.symbol.symbol;
       this.isLoad = true;
     });
   }
 
-  eliminaElemento(typeStock: TypeStock) {
-    console.log(typeStock);
+  confermaEliminaElemento(typeStock: TypeStock) {
+
+    const modalRef = this.modalService.open(ModalComponent).result.then(result => {
+      if (result === 'OK') {
+        this.eliminaEvento.emit(typeStock.symbol);
+      }
+    });
+    console.log(modalRef);
 
   }
+
+
 
 }

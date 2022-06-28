@@ -12,4 +12,5 @@ export interface Quote {
 export interface TypeStock{
     name: string;
     quote: Quote;
+    symbol: string;
   }

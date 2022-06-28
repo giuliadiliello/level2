@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { ISymbol } from 'src/app/core/model/search.interface';
 import { HttpService } from 'src/app/core/service/http.service';
@@ -19,7 +20,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
   [Validators.required, Validators.minLength(1), Validators.maxLength(5), Validators.pattern('[a-zA-Z ]*')]);
 
 
-  constructor(private managerService: ManagerService, private httpService: HttpService) { }
+  constructor(
+    private managerService: ManagerService, 
+    private httpService: HttpService,
+    private toastrService: ToastrService) { }
  
 
   ngOnInit(): void {
@@ -48,6 +52,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
             this.managerService.addSymbolToList(stockSelezionato[0]);
             this.symbolList = this.managerService.getSymbolList();
             this.symbolForm.setValue('');
+            this.symbolForm.reset();
+            setTimeout(() => {
+              this.toastrService.success('Stock added!', 'Success!', { positionClass: 'toast-top-center'});
+            }, 500);
+         
           }
           else {
             this.symbolForm.setErrors({'isSimbolNotFound' : true});
@@ -86,6 +95,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
   }
 
+  eliminaStock($event: string) {
+     this.managerService.deleteSymbolToList($event);
+     this.toastrService.success('Stock deleted!', 'Success!', { positionClass: 'toast-top-center'});
+     this.caricaDatiPregressi();
 
+  }
 
 }

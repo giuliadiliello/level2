@@ -6,14 +6,16 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './component/modal/modal.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -21,14 +23,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModalModule,
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     HeaderComponent,
     TranslateModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModalModule
   ]
 })
 export class SharedModule { }

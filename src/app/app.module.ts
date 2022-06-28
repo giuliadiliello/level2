@@ -9,6 +9,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderInterceptorService } from './core/interceptor/loader-interceptor.service';
 import { SpinnerComponent } from './shared/component/spinner/spinner.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -28,7 +30,13 @@ import { SpinnerComponent } from './shared/component/spinner/spinner.component';
         deps: [HttpClient],
       },
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // 2 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
