@@ -4,3 +4,36 @@
     padding-right: 26px;
     padding-top: 26px;
 }
+
+.info-element-title {
+    font-weight: 400;
+    font-size: 16px;  
+}
+
+.info-element-value {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.box-info {
+    padding-right: 20%;
+}
+
+.up-arrow {
+    color: green;
+    font-size: 3em;
+}
+
+.down-arrow {
+    color: red;
+    font-size: 3em;
+}
+
+.icon-close {
+    float: right;
+    cursor: pointer;
+}
+
+.title-card {
+    display: inline;
+}

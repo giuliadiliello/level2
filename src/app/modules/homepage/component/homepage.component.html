@@ -44,12 +44,14 @@
 
     </div>
   </div>
+
+  <ng-container *ngFor="let simbolo of symbolList">
+    <app-current-quote [symbol]="simbolo"></app-current-quote>
+</ng-container>
 </div>
 
 
-<ng-container *ngFor="let simbolo of symbolList">
-    <app-current-quote [symbol]="simbolo"></app-current-quote>
-</ng-container>
+
 
 
         

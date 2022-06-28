@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -19,13 +20,15 @@ import { TranslateModule } from '@ngx-translate/core';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    FontAwesomeModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     HeaderComponent,
-    TranslateModule
+    TranslateModule,
+    FontAwesomeModule
   ]
 })
 export class SharedModule { }

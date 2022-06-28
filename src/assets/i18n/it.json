@@ -2,7 +2,9 @@
  "homePage": {
     "titolo": "Stock Traking App",
     "change-to-day": "Change today: ",
-    "opening-price": "Opening price: "
+    "opening-price": "Opening price: ",
+    "current-price": "Current price: ",
+    "high-price": "High price: "
   
  },
  "label1": "Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)",

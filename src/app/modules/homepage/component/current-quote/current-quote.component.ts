@@ -4,7 +4,7 @@ import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs';
 import { Quote, TypeStock } from 'src/app/core/model/quote.interface';
 import { ISymbol, ISymbolLookup } from 'src/app/core/model/search.interface';
 import { HttpService } from 'src/app/core/service/http.service';
-
+import { faArrowDown, faArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -14,6 +14,9 @@ import { HttpService } from 'src/app/core/service/http.service';
   styleUrls: ['./current-quote.component.css']
 })
 export class CurrentQuoteComponent implements OnInit, OnDestroy {
+  faArrowUp = faArrowUp;
+  faArrowDown = faArrowDown;
+  faXmark = faXmark;
   private destroy$ = new Subject();
   @Input()
   symbol!: ISymbol;
@@ -95,6 +98,11 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
       this.typeStock.name = this.symbol.description;
       this.isLoad = true;
     });
+  }
+
+  eliminaElemento(typeStock: TypeStock) {
+    console.log(typeStock);
+
   }
 
 }
