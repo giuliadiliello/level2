@@ -8,6 +8,7 @@ import { faArrowDown, faArrowUp, faXmark } from '@fortawesome/free-solid-svg-ico
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 
 
@@ -25,6 +26,7 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
   @Input()
   symbol!: ISymbol;
 
+
   @Output()
   eliminaEvento: EventEmitter<string> = new EventEmitter<string>();
 
@@ -33,7 +35,8 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
   isLoad = false;
   constructor(
     private httpService: HttpService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router:Router
    ) { }
   
 
@@ -120,6 +123,11 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
       }
     });
     console.log(modalRef);
+
+  }
+
+  gotoSentimentPage(typeStock: TypeStock) {
+    this.router.navigate(['sentiment', typeStock.symbol]);
 
   }
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Quote } from '../model/quote.interface';
 import { ISymbolLookup } from '../model/search.interface';
+import { ISentimentResponse } from '../model/sentiment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +23,19 @@ export class HttpService {
     return this.http.get<Quote>(environment.api.getQuota, {params});
   }
 
-  getSymbolLookup(symbol: string | null): Observable<ISymbolLookup> {
+  getSymbolLookup(symbol: string): Observable<ISymbolLookup> {
     let params = new HttpParams();
-    if (symbol)
-      params = params.set('q', `${symbol}`);
+    params = params.set('q', `${symbol}`);
     params = params.set('token', `${this.token}`);
     return this.http.get<ISymbolLookup>(environment.api.search, {params});
+  }
+
+  getSentiment(symbol: string, from: string, to: string): Observable<ISentimentResponse> {
+    let params = new HttpParams();
+    params = params.set('symbol', `${symbol}`);
+    params = params.set('from', `${from}`);
+    params = params.set('to', `${to}`);
+    params = params.set('token', `${this.token}`);
+    return this.http.get<ISentimentResponse>(environment.api.sentiment, {params});
   }
 }

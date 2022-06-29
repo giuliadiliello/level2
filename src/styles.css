@@ -19,6 +19,11 @@
     padding-right: 20%;
 }
 
+.box-info-2 {
+    padding-left: 18px;
+    padding-top: 18px;
+}
+
 .up-arrow {
     color: green;
     font-size: 3em;

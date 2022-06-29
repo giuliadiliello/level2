@@ -11,6 +11,7 @@ import { LoaderInterceptorService } from './core/interceptor/loader-interceptor.
 import { SpinnerComponent } from './shared/component/spinner/spinner.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
     }),
   ],
   providers: [
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]

@@ -8,10 +8,10 @@ export class ManagerService {
   symbolList: ISymbol[] = [];
   constructor() { }
 
-  //aggiungo il simbolo in testa prima i più nuovi
+  
   addSymbolToList(symbol: ISymbol) {
      var listaCorrente = JSON.parse(localStorage.getItem("listSymbolStock") ?? "[]");
-     listaCorrente.unshift(symbol);
+     listaCorrente.unshift(symbol); //aggiungo il simbolo in testa prima i più nuovi
      localStorage.setItem("listSymbolStock", JSON.stringify(listaCorrente));
  
   }
@@ -24,17 +24,15 @@ export class ManagerService {
     var listaCorrente = JSON.parse(localStorage.getItem("listSymbolStock") ?? "[]");
     listaCorrente.forEach((element: ISymbol, index: number)=>{
       if(element.symbol === symbol) {
-        console.log(index);
         listaCorrente.splice(index,1);
-        console.log(listaCorrente);
       }
-       
    });
+
    if (listaCorrente.length > 0) {
-    localStorage.setItem("listSymbolStock", JSON.stringify(listaCorrente));
+      localStorage.setItem("listSymbolStock", JSON.stringify(listaCorrente));
    }
    else {
-    localStorage.removeItem("listSymbolStock");
+      localStorage.removeItem("listSymbolStock");
    }
 
   }

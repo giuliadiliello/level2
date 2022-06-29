@@ -1,0 +1,34 @@
+<div class="bodyContainer" *ngIf="stockSelezionato">
+    <div class="card shadow mb-5 bg-white rounded" *ngIf="isLoad">
+        <div class="card-header">
+            <h3 class="title-card">{{stockSelezionato.description}} ({{stockSelezionato.symbol}})</h3>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-start mb-3 flex-wrap">
+                <div class="box-info d-flex justify-content-start mb-3 flex-wrap" *ngFor="let mensilita of sentiment">
+                    <div>
+                    <p class="info-element-value">{{getMonthName(mensilita.month) | uppercase}}</p>
+                    <p> {{ 'sentiment.change' | translate }} <span class="info-element-value">{{mensilita.change > 0 ? '+' : ''}}{{mensilita.change}}</span></p>
+                    <p> {{ 'sentiment.mpsr' | translate }} <span class="info-element-value">{{mensilita.mspr}}</span></p>
+                  
+                    </div>
+                    <div class="box-info-2">
+                    <fa-icon [icon]="faArrowUp" class="up-arrow" *ngIf="mensilita.change > 0; else elseBlock"></fa-icon>
+                    <ng-template #elseBlock>
+                        <fa-icon [icon]="faArrowDown" class="down-arrow"></fa-icon>
+                    </ng-template>
+                    </div>
+                </div>
+
+              
+
+
+        
+
+
+            </div>
+        </div>
+    </div>   
+
+    <button type="button" class="btn btn-outline-primary" (click)="back()">{{ 'button3' | translate }}</button>
+</div>

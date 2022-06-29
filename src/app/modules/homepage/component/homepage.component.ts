@@ -34,8 +34,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
   }
 
-
-
   caricaDatiPregressi() {
     this.symbolList = this.managerService.getSymbolList();
   }
