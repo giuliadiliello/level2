@@ -8,16 +8,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit, OnDestroy{
   title = 'stock-tracker-application';
-  constructor(private translate: TranslateService) {
-
-  }
+  constructor(private translate: TranslateService) {}
 
   ngOnDestroy(): void {
 
   }
   ngOnInit(): void {
-    this.translate.setDefaultLang('it');
-    this.translate.use('it');
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
   }
 
 

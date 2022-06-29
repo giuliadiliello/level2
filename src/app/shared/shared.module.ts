@@ -6,7 +6,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './component/modal/modal.component';
 
 
@@ -25,6 +25,7 @@ import { ModalComponent } from './component/modal/modal.component';
     TranslateModule,
     FontAwesomeModule,
     NgbModalModule,
+    NgbModule
   ],
   exports: [
     FormsModule,
@@ -32,7 +33,9 @@ import { ModalComponent } from './component/modal/modal.component';
     HeaderComponent,
     TranslateModule,
     FontAwesomeModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbModule,
+    FooterComponent
   ]
 })
 export class SharedModule { }

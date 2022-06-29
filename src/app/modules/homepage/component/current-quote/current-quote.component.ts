@@ -1,13 +1,12 @@
 
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { forkJoin, map, Subject, switchMap, takeUntil } from 'rxjs';
-import { Quote, TypeStock } from 'src/app/core/model/quote.interface';
-import { ISymbol, ISymbolLookup } from 'src/app/core/model/search.interface';
+import { Subject, takeUntil } from 'rxjs';
+import { TypeStock } from 'src/app/core/model/quote.interface';
+import { ISymbol } from 'src/app/core/model/search.interface';
 import { HttpService } from 'src/app/core/service/http.service';
 import { faArrowDown, faArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
-import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
 
@@ -23,9 +22,9 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
   faArrowDown = faArrowDown;
   faXmark = faXmark;
   private destroy$ = new Subject();
+
   @Input()
   symbol!: ISymbol;
-
 
   @Output()
   eliminaEvento: EventEmitter<string> = new EventEmitter<string>();
@@ -44,63 +43,19 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    /* quando aggiungo un simbolo riaggiorno anche le vecchie quotazioni */
       this.isLoad = false;
       this.loadInfo();
   }
 
- /* ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    console.log('this.isSortChanged(changes): ' + this.isListaChanged(changes))
-    if (changes['lista'] && changes['lista'].firstChange) {
-      this.reloadAllData(this.lista);
-    }
-    else {
-      if (this.isListaChanged(changes)) {
-        let elementoAggiunto = changes['lista'].currentValue.filter((x: string) => !changes['lista'].previousValue.includes(x));
-        console.log('ELEMENTO AGIUNTO: ' + elementoAggiunto);
-        //this.addElement(elementoAggiunto);
-      }
-    }
 
-
-  }*/
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
   }
  
 
- /*isListaChanged(changes: SimpleChanges) {
-    return (
-      changes['lista'] &&
-      changes['lista'].currentValue &&
-      changes['lista'].previousValue &&
-      (changes['lista'].currentValue.length !== changes['lista'].previousValue.length)
-    );
-  }*/
-
-
- /* reloadAllData(lista: string[]) {
-  this.listaQuote = [];
-  console.log(lista);
-
-  this.lista?.forEach(symbol => {
-    forkJoin(
-      [
-        this.httpService.getQuote(symbol),
-        this.httpService.getSymbolLookup(symbol)
-      ]
-    ).pipe(
-      takeUntil(this.destroy$),
-    ).subscribe( result => {
-      this.listaQuote?.push(result[0]);
-      console.log(result[0]);
-    });
-
-   });
-
-    
-  }*/
 
   loadInfo() {
     this.typeStock = {} as TypeStock;

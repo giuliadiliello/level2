@@ -11,6 +11,7 @@
         </div>
         <div class="row">
             <div class="col-sm">
+               <!-- <input type="text" class="form-control uppercase" id="stockSymbol" [formControl]="symbolForm" maxlength="5" [ngbTypeahead]="search"> -->
                 <input type="text" class="form-control uppercase" id="stockSymbol" [formControl]="symbolForm" maxlength="5">
                 <div *ngIf="symbolForm.invalid && (symbolForm.dirty || symbolForm.touched)">
                     <div [hidden]="!symbolForm.errors?.['required']" class="alert alert-danger alertCustom">
