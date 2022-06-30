@@ -55,9 +55,6 @@ export class SentimentComponent implements OnInit, OnDestroy {
            this.sentiment = res.data;
            this.stockSelezionato = this.managerService.getSymbolList().find(x => x.symbol==this.symbol.toUpperCase());
            this.isLoad = true;
-       },
-       error => {
-      //   console.log(error);
        });
    
      }

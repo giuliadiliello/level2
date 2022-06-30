@@ -100,9 +100,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
             this.symbolForm.markAllAsTouched();
             return;
           }
-      },
-      error => {
-       // console.log(error);
       })
     }
 
