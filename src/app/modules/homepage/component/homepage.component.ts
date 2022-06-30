@@ -113,11 +113,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
 
-  /**Questa è la funzione per l'autocomplete che si potrebbe utilizzare.
-   * Ma l'api api/v1/search data è troppo lenta (probabilmente è una like) e non restituisce
+  /**Come indicato sul compito per inserire i simboli dello stock è stato usata una form semplice
+   * Che accetta da 1 a 5 caratteri.
+   * Ma per una soluzione più user friendly si sarebbe potuto usare una autocomplete. Con la api api/v1/search è impossibile fare l'autocomplete
+   * perchè è troppo lenta (probabilmente è una like) e non restituisce
    * come dovrebbe la lista. Ad esempio se metto T mi restituisce 45 risultati
-   * tra i quali neanche c'è TSLA. Serviebbe una api iniziale più veloce che carica la lista completa dei soli simboli
-   * vedi ad esempio su yahoo
+   * tra i quali neanche c'è TSLA. Serviebbe una api iniziale più veloce che carica la sola lista completa dei soli simboli
    */
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
   text$.pipe(
