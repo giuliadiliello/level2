@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <ng-container *ngFor="let simbolo of symbolList">
+<ng-container *ngFor="let simbolo of symbolList">
     <app-current-quote [symbol]="simbolo" (eliminaEvento)="eliminaStock($event)"></app-current-quote>
 </ng-container>
 </div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ISymbol } from 'src/app/core/model/search.interface';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +11,7 @@ export class ManagerService {
   constructor() { }
 
   
+  /** Funzione che aggiunge il simbolo inserito nel localStorage */
   addSymbolToList(symbol: ISymbol) {
      var listaCorrente = JSON.parse(localStorage.getItem("listSymbolStock") ?? "[]");
      listaCorrente.unshift(symbol); //aggiungo il simbolo in testa prima i più nuovi
@@ -16,10 +19,15 @@ export class ManagerService {
  
   }
 
+    /* Funzione che restituiscel'oggetto listSymbolStock che contiene la lista di simboli con descrizione
+     * dello stock memorizzati nel localStorage
+     */
   getSymbolList(): ISymbol[] {
     return JSON.parse(localStorage.getItem("listSymbolStock") ?? "[]");
   }
 
+
+  /* Funzione che cancella dalla sessione il simbolo passato in input */
   deleteSymbolToList(symbol: string) {
     var listaCorrente = JSON.parse(localStorage.getItem("listSymbolStock") ?? "[]");
     listaCorrente.forEach((element: ISymbol, index: number)=>{

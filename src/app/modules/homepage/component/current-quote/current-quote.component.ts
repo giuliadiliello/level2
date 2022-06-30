@@ -42,24 +42,23 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+  /* Metodo che intercetta il cambiamento della lista mandata in input.
+  *  quando aggiungo un simbolo riaggiorno anche le vecchie quotazioni */
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    /* quando aggiungo un simbolo riaggiorno anche le vecchie quotazioni */
       this.isLoad = false;
       this.loadInfo();
   }
-
-
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
   }
  
 
-
+/* Funzione che chiama il servizio getQuote e costruisce in oggetto di tipo TypeStock
+* che al suo interno contiene sia le informazioni relative alle quotazioni che il simbolo che la descrizione
+* della compagnia */
   loadInfo() {
     this.typeStock = {} as TypeStock;
-
     this.httpService.getQuote(this.symbol.symbol).pipe(
       takeUntil(this.destroy$),
     ).subscribe( result => {
@@ -70,20 +69,18 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
     });
   }
 
+/* Prima di eliminare uno stock viene aperta una modale di conferma */
   confermaEliminaElemento(typeStock: TypeStock) {
-
     const modalRef = this.modalService.open(ModalComponent).result.then(result => {
       if (result === 'OK') {
         this.eliminaEvento.emit(typeStock.symbol);
       }
     });
-    console.log(modalRef);
-
   }
 
+  /* Routing alla pagina sentiment con passagio del symbolo selezionato come parametro */
   gotoSentimentPage(typeStock: TypeStock) {
     this.router.navigate(['sentiment', typeStock.symbol]);
-
   }
 
 

@@ -29,45 +29,51 @@ export class SentimentComponent implements OnInit, OnDestroy {
     public datepipe: DatePipe,
     private managerService: ManagerService,
     private router:Router) { 
+    /* Recupero il parametro con il simbolo dalla rotta */
     this.symbol = this.route.snapshot.params['symbol'];
   }
  
 
   ngOnInit(): void {
-   var toDate = new Date();
-   var toDateString = this.datepipe.transform(toDate, 'yyyy-MM-dd');
-   console.log(toDateString);
+    this.loadInfoLastThreeMonth();
+  
+  }
+
+
+  /* Funzione che recuper le informazioni di quotazione relative agli ultimi tre mesi a partire
+  *  dal mese corrente */
+  loadInfoLastThreeMonth() {
+    var toDate = new Date();
+    var toDateString = this.datepipe.transform(toDate, 'yyyy-MM-dd');
     var fromDate = toDate.setMonth(toDate.getMonth() - 2);
     var fromDateString = this.datepipe.transform(fromDate, 'yyyy-MM-dd');
-    console.log(fromDateString);
-
-    if (fromDateString && toDateString) {
-      this.httpService.getSentiment(this.symbol, fromDateString, toDateString).pipe(
-        takeUntil(this.destroy$)
-      ).subscribe((res: ISentimentResponse) => {
-          console.log(this.symbol);
-          this.sentiment = res.data;
-          this.stockSelezionato = this.managerService.getSymbolList().find(x => x.symbol==this.symbol.toUpperCase());
-          console.log(this.stockSelezionato);
-          this.isLoad = true;
-      });
-  
-    }
  
+     if (fromDateString && toDateString) {
+       this.httpService.getSentiment(this.symbol, fromDateString, toDateString).pipe(
+         takeUntil(this.destroy$)
+       ).subscribe((res: ISentimentResponse) => {
+           this.sentiment = res.data;
+           this.stockSelezionato = this.managerService.getSymbolList().find(x => x.symbol==this.symbol.toUpperCase());
+           this.isLoad = true;
+       });
+   
+     }
   }
+
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
   }
 
-getMonthName = (numeroMese: number): string => {
-    const monthNames = [ 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
-    'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre' ];
-    return monthNames[numeroMese];
+  /* Metodo che restituisce il nome del mese dato il numero */
+  getMonthName = (numeroMese: number): string => {
+      const monthNames = [ 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
+      'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre' ];
+      return monthNames[numeroMese];
   }
 
   back() {
-    this.router.navigate(['']);
+      this.router.navigate(['']);
   }
 
 }

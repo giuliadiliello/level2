@@ -34,42 +34,17 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
   }
 
+  /* Al reload della pagina se ci sono simboli del localStorage ricarico le quotazioni aggiornate e li faccio
+  * vedere nella lista, utilizzando il metodo ngOnChange del componente figlio CurrentQuoteComponent  */
   caricaDatiPregressi() {
     this.symbolList = this.managerService.getSymbolList();
   }
 
 
-  loadSymbolIntoLocalStorage(symbol: string) {
-    this.httpService.getSymbolLookup(symbol).pipe(
-      takeUntil(this.destroy$),
-    ).subscribe ( res => {
-        if (res.count > 0) {
-          let resultArray = res.result;
-          let stockSelezionato = resultArray.find(x => x.symbol == symbol.toUpperCase());
-          if (stockSelezionato) {
-            this.managerService.addSymbolToList(stockSelezionato);
-            this.symbolList = this.managerService.getSymbolList();
-            this.symbolForm.setValue('');
-            this.symbolForm.reset();
-            setTimeout(() => {
-              this.toastrService.success('Stock added!', 'Success!', { positionClass: 'toast-top-center'});
-            }, 500);
-         
-          }
-          else {
-            this.symbolForm.setErrors({'isSimbolNotFound' : true});
-            this.symbolForm.markAllAsTouched();
-            return;
-          }
-        }
-        else {
-          this.symbolForm.setErrors({'isSimbolNotFound' : true});
-          this.symbolForm.markAllAsTouched();
-          return;
-        }
-    })
-  }
 
+
+  /* Funzine che verifica che il simbolo inserito dall'utente non sia già presente in localStorage
+  * nel caso già esista sarà fatto vedere un messaggio di errore, altrimenti si prosegue con la funzine  loadSymbolIntoLocalStorage*/
   verificaSimbolo() {
     if (this.symbolForm.invalid) {
       this.symbolForm.markAllAsTouched();
@@ -93,6 +68,43 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
   }
 
+
+    /* Funzione che fa la chiamata per reperire la descrizione della compagnia. Filtra i risultati ottenuti
+  *  cercando esattamente che il simbolo inserito sia uguale al campo symbol. Inserisco quindi nel localStorage
+  * direttamente l'oggeto ottenuto dalla chiamata getSymbolLookup così ho già la descrizione della compagnia  */
+    loadSymbolIntoLocalStorage(symbol: string) {
+      this.httpService.getSymbolLookup(symbol).pipe(
+        takeUntil(this.destroy$),
+      ).subscribe ( res => {
+          if (res.count > 0) {
+            let resultArray = res.result;
+            let stockSelezionato = resultArray.find(x => x.symbol == symbol.toUpperCase());
+            if (stockSelezionato) {
+              this.managerService.addSymbolToList(stockSelezionato);
+              this.symbolList = this.managerService.getSymbolList();
+              this.symbolForm.setValue('');
+              this.symbolForm.reset();
+              setTimeout(() => {
+                this.toastrService.success('Stock added!', 'Success!', { positionClass: 'toast-top-center'});
+              }, 500);
+           
+            }
+            else {
+              this.symbolForm.setErrors({'isSimbolNotFound' : true});
+              this.symbolForm.markAllAsTouched();
+              return;
+            }
+          }
+          else {
+            this.symbolForm.setErrors({'isSimbolNotFound' : true});
+            this.symbolForm.markAllAsTouched();
+            return;
+          }
+      })
+    }
+
+
+  /* Funzione che elimina dal localStorage il simbolo inserito */
   eliminaStock($event: string) {
      this.managerService.deleteSymbolToList($event);
      this.toastrService.success('Stock deleted!', 'Success!', { positionClass: 'toast-top-center'});
@@ -104,7 +116,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   /**Questa è la funzione per l'autocomplete che si potrebbe utilizzare.
    * Ma l'api api/v1/search data è troppo lenta (probabilmente è una like) e non restituisce
    * come dovrebbe la lista. Ad esempio se metto T mi restituisce 45 risultati
-   * tra i quali neanche c'è TSLA. Serviebbe una api iniziale che carica la lista completa dei simboli
+   * tra i quali neanche c'è TSLA. Serviebbe una api iniziale più veloce che carica la lista completa dei soli simboli
    * vedi ad esempio https://finance.yahoo.com/quote/AMZN.NE?p=AMZN.NE&.tsrc=fin-srch
    */
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
