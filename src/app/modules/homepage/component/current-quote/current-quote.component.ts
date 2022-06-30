@@ -66,6 +66,9 @@ export class CurrentQuoteComponent implements OnInit, OnDestroy {
       this.typeStock.name = this.symbol.description;
       this.typeStock.symbol = this.symbol.symbol;
       this.isLoad = true;
+    },
+    error => {
+      console.log(error);
     });
   }
 
