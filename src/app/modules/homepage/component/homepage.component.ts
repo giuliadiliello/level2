@@ -102,7 +102,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
           }
       },
       error => {
-        console.log(error);
+       // console.log(error);
       })
     }
 

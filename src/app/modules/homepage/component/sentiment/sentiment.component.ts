@@ -57,7 +57,7 @@ export class SentimentComponent implements OnInit, OnDestroy {
            this.isLoad = true;
        },
        error => {
-         console.log(error);
+      //   console.log(error);
        });
    
      }
