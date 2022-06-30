@@ -117,7 +117,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
    * Ma l'api api/v1/search data è troppo lenta (probabilmente è una like) e non restituisce
    * come dovrebbe la lista. Ad esempio se metto T mi restituisce 45 risultati
    * tra i quali neanche c'è TSLA. Serviebbe una api iniziale più veloce che carica la lista completa dei soli simboli
-   * vedi ad esempio https://finance.yahoo.com/quote/AMZN.NE?p=AMZN.NE&.tsrc=fin-srch
+   * vedi ad esempio su yahoo
    */
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
   text$.pipe(
